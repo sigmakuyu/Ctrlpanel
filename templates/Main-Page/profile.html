@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<link rel="icon" type="image/png" href="/static/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+<link rel="shortcut icon" href="/static/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+<link rel="manifest" href="/static/site.webmanifest" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahabat Ai Nusantara |> Profil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+
+      if (params.get("ubahmail") === "success") {
+        const popup = document.getElementById("popupubahMail");
+        popup.classList.remove("opacity-0", "translate-y-[-10px]");
+        popup.classList.add("opacity-100", "translate-y-0");
+
+        setTimeout(() => {
+          popup.classList.remove("opacity-100", "translate-y-0");
+          popup.classList.add("opacity-0", "translate-y-[-10px]");
+          window.location.href = '/profil';
+        }, 3000);
+      }
+
+      if (params.get("ubah") === "success") {
+        const popupDaftar = document.getElementById("popupubah");
+        popupDaftar.classList.remove("opacity-0", "translate-y-[-10px]");
+        popupDaftar.classList.add("opacity-100", "translate-y-0");
+
+        setTimeout(() => {
+          popupDaftar.classList.remove("opacity-100", "translate-y-0");
+          popupDaftar.classList.add("opacity-0", "translate-y-[-10px]");
+          window.location.href = '/profil';
+        }, 3000);
+      }
+
+      // ANIMASI MASUK MAIN
+      const main = document.getElementById("mainContent");
+      setTimeout(() => {
+        main.classList.remove("opacity-0", "translate-y-4");
+        main.classList.add("opacity-100", "translate-y-0");
+      }, 100);
+    });
+  </script>
+</head>
+<body class="bg-gradient-to-br from-white to-blue-100 min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+<header class="bg-white border-b border-gray-200 py-3 shadow-sm">
+  <div class="max-w-screen-lg mx-auto flex justify-between items-center px-4">
+    <a href="/dashboard" class="transition-transform duration-200 hover:scale-105">
+  <img src="/static/logo2.png" alt="Logo" class="h-10 max-w-[200px]" />
+</a>
+    <span class="text-sm text-gray-500">ID</span>
+  </div>
+</header>
+
+  <!-- MAIN -->
+  <main id="mainContent" class="flex-grow flex items-center justify-center px-4 py-10 opacity-0 translate-y-4 transition-all duration-700">
+    <div class="bg-white shadow-xl rounded-2xl w-full max-w-md p-6 sm:p-8">
+      <div class="flex flex-col items-center text-center">
+        <!-- Profile Image -->
+        <div class="mb-4">
+          <div class="w-28 h-28 rounded-full bg-gray-200 overflow-hidden border-4 border-blue-100">
+            <img src="{{ photo }}" alt="Foto Profil" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        
+        <!-- User Info -->
+        <h1 class="text-2xl font-bold mb-1">{{ user.nama }}</h1>
+        <p class="text-gray-600 mb-2">{{ user.email }}</p>
+
+        <!-- Bio Card -->
+        <div class="group bg-blue-50 p-4 rounded-lg shadow-sm w-full mb-6 transition duration-300 hover:shadow-md hover:bg-blue-100">
+          <p class="text-gray-700 text-sm italic text-center break-words">
+            {% if user.bio %}
+              {{ user.bio }}
+            {% else %}
+              <span class="text-gray-400 italic">Belum menambahkan bio.</span>
+            {% endif %}
+          </p>
+        </div>
+
+        <!-- User Details -->
+        <div class="w-full space-y-4 mb-6">
+          <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+            <i class="fa-solid fa-envelope w-6 text-gray-500"></i>
+            <span class="ml-2 text-gray-700">{{ user.email }}</span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-4 w-full">
+          <a href="{{ url_for('edit_profil') }}" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium text-center">
+            <i class="fa-solid fa-pen-to-square mr-1"></i> Edit Profil
+          </a>
+          <a href="{{ url_for('dashboard') }}" class="flex-1 border border-gray-300 hover:bg-gray-100 py-3 rounded-lg font-medium text-center">
+            <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> Kembali
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-gray-200 py-4 text-xs">
+    <div class="max-w-screen-md mx-auto text-center text-gray-500 space-y-1 leading-tight px-4">
+      <p class="font-semibold text-gray-700">Kocheng's |> Sahabat Ai Nusantara</p>
+      <p>JL. Anggrek Klagenserut, Jiwan Kabupaten Madiun (6311).</p>
+      <p><i class="fa-solid fa-envelope"></i> kentukimeme@gmail.com</p>
+      <p><i class="fa-brands fa-tiktok"></i> @gemoyberanak2</p>
+      <p>
+        <a href="https://wa.me/6281775155057" target="_blank" class="text-green-600 hover:underline">
+          <i class="fa-brands fa-whatsapp"></i> +62 817-7515-5057
+        </a>
+      </p>
+    </div>
+  </footer>
+  
+  <!-- NOTIFIKASI POPUP -->
+  <div id="popupubahMail" class="fixed top-5 right-5 bg-white border-l-4 border-green-500 shadow-lg rounded-md px-4 py-3 text-green-700 flex items-center space-x-3 opacity-0 translate-y-[-10px] transition-all duration-500">
+    <i class="fa-solid fa-circle-check text-green-500 text-xl"></i>
+    <span>Berhasil mengubah email!</span>
+  </div>
+
+  <div id="popupubah" class="fixed top-5 right-5 bg-white border-l-4 border-green-500 shadow-lg rounded-md px-4 py-3 text-green-700 flex items-center space-x-3 opacity-0 translate-y-[-10px] transition-all duration-500">
+    <i class="fa-solid fa-circle-check text-green-500 text-xl"></i>
+    <span>Berhasil menerapkan perubahan!</span>
+  </div>
+
+  <!-- Safelist utility (untuk build Tailwind) -->
+  <div class="hidden opacity-100 translate-y-0"></div>
+</body>
+</html>

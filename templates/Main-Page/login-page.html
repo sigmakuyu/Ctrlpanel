@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<link rel="icon" type="image/png" href="/static/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+<link rel="shortcut icon" href="/static/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+<link rel="manifest" href="/static/site.webmanifest" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kocheng's |> Sahabat Ai Nusantara</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-white to-blue-100 min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+<header class="bg-white border-b border-gray-200 py-3 shadow-sm">
+  <div class="max-w-screen-lg mx-auto flex justify-between items-center px-4">
+    <a href="/" class="transition-transform duration-200 hover:scale-105">
+  <img src="/static/logo2.png" alt="Logo" class="h-10 max-w-[200px]" />
+</a>
+    <span class="text-sm text-gray-500">ID</span>
+  </div>
+</header>
+
+  <!-- MAIN -->
+  <main class="flex-grow flex items-center justify-center px-4 py-10">
+    <div class="bg-white shadow-xl rounded-2xl w-full max-w-md p-6 sm:p-8 text-center">
+      <h1 class="text-xl sm:text-2xl font-bold mb-6">Masuk</h1>
+
+      <!-- Login Google -->
+      <a href="/login/google" class="flex items-center justify-center border border-gray-300 rounded-full py-3 px-4 mb-4 hover:shadow transition bg-white w-full text-sm sm:text-base">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5 mr-2" />
+        <span class="font-medium">Daftar dengan Google</span>
+      </a>
+
+      <!-- Login Email -->
+      <a href="/daftar/email" class="flex items-center justify-center border border-gray-300 rounded-full py-3 px-4 mb-4 hover:shadow transition bg-white w-full text-sm sm:text-base">
+        <i class="fa-solid fa-envelope text-lg mr-2"></i>
+        <span class="font-medium">Daftar dengan Email</span>
+      </a>
+
+      <!-- Separator -->
+      <div class="flex items-center my-4">
+        <hr class="flex-grow border-t border-gray-300" />
+        <span class="mx-3 text-gray-500 text-xs sm:text-sm">atau masuk dengan email</span>
+        <hr class="flex-grow border-t border-gray-300" />
+      </div>
+
+      <!-- Form Email Login -->
+      <form action="/login/email" method="POST" class="space-y-4">
+        <input type="email" name="email" placeholder="Email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 text-sm sm:text-base" required>
+        <input type="password" name="password" placeholder="Password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300 text-sm sm:text-base" required>
+        <button type="submit" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-full font-semibold transition">
+          Masuk
+        </button>
+      </form>
+
+      <!-- Link Daftar -->
+      <p class="mt-6 text-xs sm:text-sm text-gray-600">
+        Belum punya akun?
+        <a href="/daftar/email" class="text-blue-600 hover:underline font-medium">Daftar</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-gray-200 py-4 text-xs">
+    <div class="max-w-screen-md mx-auto text-center text-gray-500 space-y-1 leading-tight px-4">
+      <p class="font-semibold text-gray-700">Kocheng's |> Sahabat Ai Nusantara</p>
+      <p>JL. Anggrek Klagenserut, Jiwan Kabupaten Madiun (6311).</p>
+      <p><i class="fa-solid fa-envelope"></i> kentukimeme@gmail.com</p>
+      <p><i class="fa-brands fa-tiktok"></i> @gemoyberanak2</p>
+      <p>
+        <a href="https://wa.me/6281775155057" target="_blank" class="text-green-600 hover:underline">
+          <i class="fa-brands fa-whatsapp"></i> +62 817-7515-5057
+        </a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

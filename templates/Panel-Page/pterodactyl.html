@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahabat Ai Nusantara |> Buat Server Gratis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" href="/static/favicon-96x96.png" />
+  <style>
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeInUp {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-white to-blue-100 min-h-screen flex flex-col">
+
+<!-- HEADER -->
+<header class="bg-white border-b border-gray-200 py-3 shadow-sm">
+  <div class="max-w-screen-lg mx-auto flex justify-between items-center px-4">
+    <a href="/dashboard">
+      <img src="/static/logo2.png" alt="Logo" class="h-10 max-w-[200px]" />
+    </a>
+    <span class="text-sm text-gray-500">ID</span>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="flex-grow px-4 py-10 animate-fadeInUp">
+  <div class="max-w-screen-md mx-auto bg-white p-8 rounded-2xl shadow-xl">
+    <h1 class="text-3xl font-bold text-center mb-6">Buat Server Pterodactyl Gratis</h1>
+    <form method="POST" action="/panel/create" class="space-y-6" id="serverForm">
+  <div>
+    <label for="server_name" class="block text-sm font-medium text-gray-700">Nama Server</label>
+    <input
+      type="text"
+      name="server_name"
+      id="server_name"
+      placeholder="Contoh: MyBot"
+      required
+      class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+  </div>
+
+  <div>
+    <label for="egg" class="block text-sm font-medium text-gray-700">Pilih Egg</label>
+    <select
+      name="egg"
+      id="egg"
+      required
+      class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+      <option value="" disabled selected>-- Pilih Egg --</option>
+      <option value="16">Nodejs (Rekomendasi)</option>
+      <option value="15">Nodejs</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="node" class="block text-sm font-medium text-gray-700">Pilih Node</label>
+    <select
+      name="node"
+      id="node"
+      required
+      class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+    >
+      <option value="" disabled selected>-- Pilih Node --</option>
+      <option value="1">Node 1 - Asia</option>
+    </select>
+  </div>
+
+  <!-- Tombol Watch Ad -->
+  <button
+    type="button"
+    id="watchAdBtn"
+    onclick="tontonIklan()"
+    class="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-full font-semibold"
+  >
+    Watch Ad
+  </button>
+</form>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-white border-t border-gray-200 py-4 text-xs">
+  <div class="max-w-screen-md mx-auto text-center text-gray-500 space-y-1 leading-tight px-4">
+    <p class="font-semibold text-gray-700">Kocheng's |> Sahabat Ai Nusantara</p>
+    <p>JL. Anggrek Klagenserut, Jiwan Kabupaten Madiun (6311)</p>
+    <p><i class="fa-solid fa-envelope"></i> kentukimeme@gmail.com</p>
+    <p><i class="fa-brands fa-tiktok"></i> @gemoyberanak2</p>
+    <p>
+      <a href="https://wa.me/6281775155057" class="text-green-600 hover:underline">
+        <i class="fa-brands fa-whatsapp"></i> +62 817-7515-5057
+      </a>
+    </p>
+  </div>
+</footer>
+
+<script>
+function tontonIklan() {
+  // Buka link iklan
+  window.open('https://sawutser.top/4/9325836', '_blank'); // Ganti dengan link yang benar
+
+  // Ganti teks dan style tombol setelah delay
+  setTimeout(() => {
+    const tombol = document.getElementById('watchAdBtn');
+    tombol.innerText = "Buat Server Sekarang";  // Ganti teks tombol
+    tombol.classList.remove('bg-yellow-500', 'hover:bg-yellow-600');
+    tombol.classList.add('bg-blue-500', 'hover:bg-blue-600');
+    tombol.onclick = function() {
+      // Kirim form atau aksi buat server
+      document.getElementById("serverForm").submit();
+    };
+  }, 5000); // Delay 5 detik
+}
+</script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '5421a4eaef5512f495c9b7eed6910590',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/5421a4eaef5512f495c9b7eed6910590/invoke.js"></script>
+<script type='text/javascript' src='//pl26663174.profitableratecpm.com/58/38/7c/58387cd4aff0cd08a5794412a20ef749.js'></script>
+</body>
+</html>

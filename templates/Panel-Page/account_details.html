@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahabat Ai Nusantara | Detail Akun Pterodactyl</title>
+  <link rel="icon" type="image/png" href="/static/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+  <link rel="shortcut icon" href="/static/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+  <link rel="manifest" href="/static/site.webmanifest" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-white to-blue-100 min-h-screen flex flex-col text-sm sm:text-base">
+
+<!-- NOTIFIKASI POPUP -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% for category, message in messages %}
+    {% if category == 'has_server' %}
+      <div id="popupAccount_existing" class="fixed top-5 right-5 bg-white border-l-4 border-yellow-500 shadow-lg rounded-md px-4 py-3 text-yellow-700 flex items-center space-x-3 opacity-0 translate-y-[-10px] transition-all duration-500 z-50">
+        <i class="fa-solid fa-triangle-exclamation text-yellow-500 text-xl"></i>
+        <span>{{ message }}</span>
+      </div>
+    {% elif category == 'server_created' %}
+      <div id="popupAccount_create" class="fixed top-5 right-5 bg-white border-l-4 border-green-500 shadow-lg rounded-md px-4 py-3 text-green-700 flex items-center space-x-3 opacity-0 translate-y-[-10px] transition-all duration-500 z-50">
+        <i class="fa-solid fa-circle-check text-green-500 text-xl"></i>
+        <span>{{ message }}</span>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endwith %}
+
+<!-- HEADER -->
+<header class="bg-white border-b border-gray-200 py-3 shadow-sm">
+  <div class="max-w-screen-lg mx-auto flex justify-between items-center px-4">
+    <a href="/dashboard" class="transition-transform duration-200 hover:scale-105">
+      <img src="/static/logo2.png" alt="Logo" class="h-10 max-w-[200px]" />
+    </a>
+    <span class="text-sm text-gray-500">ID</span>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="flex-grow flex items-center justify-center px-4 py-8">
+  <div class="bg-white shadow-xl rounded-xl p-5 sm:p-8 w-full max-w-lg fade-in-up">
+    <h2 class="text-xl font-bold text-blue-600 mb-4 text-center">Detail Akun Pterodactyl Anda</h2>
+    <div class="text-gray-700 space-y-3 text-center sm:text-left">
+      <p><strong>Email:</strong> {{ account.email }}</p>
+      <p><strong>Username:</strong> {{ account.username }}</p>
+      <p><strong>Password:</strong> {{ account.username }}</p>
+      <p><strong>Akses Server Anda:</strong><br>
+        <a href="{{ account.panel_url }}" target="_blank" class="text-blue-600 hover:underline break-words">
+          {{ account.panel_url }}
+        </a>
+      </p>
+    </div>
+    <a href="/dashboard" class="mt-6 block bg-gray-200 hover:bg-gray-300 text-gray-800 py-2.5 px-6 rounded-full font-semibold text-center transition w-full">
+      Kembali ke Dashboard
+    </a>
+  </div>
+</main>
+
+<!-- GUIDE SECTION -->
+<section class="bg-white border-t border-gray-200 py-10">
+  <div class="max-w-screen-lg mx-auto px-4 text-center">
+    <h3 class="text-lg sm:text-xl font-semibold text-blue-600 mb-6">Panduan Penggunaan Panel Pterodactyl</h3>
+    <ol class="space-y-4 text-left text-gray-700">
+      <li class="flex items-start"><span class="mr-2 text-blue-600 font-bold">1.</span><p>Buka link panel Pterodactyl Anda.</p></li>
+      <li class="flex items-start"><span class="mr-2 text-blue-600 font-bold">2.</span><p>Login dengan <strong>email</strong> dan <strong>password</strong>.</p></li>
+      <li class="flex items-start"><span class="mr-2 text-blue-600 font-bold">3.</span><p>Masuk ke menu <strong>“Servers”</strong>.</p></li>
+      <li class="flex items-start"><span class="mr-2 text-blue-600 font-bold">4.</span><p>Pilih dan klik <strong>“Start”</strong>.</p></li>
+      <li class="flex items-start"><span class="mr-2 text-blue-600 font-bold">5.</span><p>Gunakan tab <strong>Console</strong> dan <strong>File</strong>.</p></li>
+      <li class="flex items-start"><span class="mr-2 text-blue-600 font-bold">6.</span><p>Lupa password? Klik <strong>“Forgot Password”</strong>.</p></li>
+    </ol>
+    <p class="mt-8 text-sm text-gray-500">Dapatkan informasi terbaru disini <a href="https://whatsapp.com/channel/0029Vb2IjRwFi8xZpEVes12h" class="text-blue-500 hover:underline">Saluran WhatsApp</a>.</p>
+    <p class="mt-8 text-sm text-gray-500">Butuh bantuan? <a href="https://wa.me/6281775155057" class="text-blue-500 hover:underline">Hubungi via WhatsApp</a>.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-white border-t border-gray-200 py-4 text-xs">
+  <div class="max-w-screen-md mx-auto text-center text-gray-500 space-y-1 leading-tight px-4">
+    <p class="font-semibold text-gray-700">Kocheng's |> Sahabat Ai Nusantara</p>
+    <p>JL. Anggrek Klagenserut, Jiwan Kabupaten Madiun (6311).</p>
+    <p><i class="fa-solid fa-envelope"></i> kentukimeme@gmail.com</p>
+    <p><i class="fa-brands fa-tiktok"></i> @gemoyberanak2</p>
+    <p>
+      <a href="https://wa.me/6281775155057" target="_blank" class="text-green-600 hover:underline">
+        <i class="fa-brands fa-whatsapp"></i> +62 817-7515-5057
+      </a>
+    </p>
+  </div>
+</footer>
+
+<!-- JS Fade In dan Popup -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Fade in
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const element = document.querySelector(".fade-in-up");
+    if (element) observer.observe(element);
+
+    // Notifikasi popup
+    const popups = ['popupAccount_existing', 'popupAccount_create'];
+    popups.forEach(id => {
+      const popup = document.getElementById(id);
+      if (popup) {
+        setTimeout(() => {
+          popup.classList.remove("opacity-0", "translate-y-[-10px]");
+          popup.classList.add("opacity-100", "translate-y-0");
+        }, 100);
+        setTimeout(() => {
+          popup.classList.remove("opacity-100", "translate-y-0");
+          popup.classList.add("opacity-0", "translate-y-[-10px]");
+        }, 4000);
+      }
+    });
+  });
+</script>
+<script src="https://ligheechoagool.com/88/tag.min.js" data-zone="142075" async data-cfasync="false"></script>
+</body>
+</html>

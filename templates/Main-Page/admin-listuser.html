@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel | Daftar User</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-out both;
+  }
+</style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="bg-gray-50 text-sm text-gray-800 min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+<header class="bg-white border-b border-gray-200 py-3 shadow-sm">
+  <div class="max-w-screen-lg mx-auto flex justify-between items-center px-4">
+    <a href="/dashboard">
+      <img src="/static/logo2.png" alt="Logo" class="h-10 max-w-[200px]" />
+    </a>
+    <span class="text-sm text-gray-500">ID</span>
+  </div>
+</header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow px-4 py-6 fade-in">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Daftar Pengguna Terdaftar</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full bg-white shadow-lg rounded-lg overflow-hidden">
+          <thead class="bg-blue-600 text-white text-left">
+            <tr>
+              <th class="px-4 py-3">ID</th>
+              <th class="px-4 py-3">Nama</th>
+              <th class="px-4 py-3">Email</th>
+              <th class="px-4 py-3">Bio</th>
+              <th class="px-4 py-3">CPU</th>
+              <th class="px-4 py-3">RAM</th>
+              <th class="px-4 py-3">Disk</th>
+              <th class="px-4 py-3">Verifikasi</th>
+              <th class="px-4 py-3">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users.items %}
+            <tr class="border-b border-gray-200 hover:bg-gray-100">
+              <td class="px-4 py-2">{{ user.id }}</td>
+              <td class="px-4 py-2">{{ user.nama }}</td>
+              <td class="px-4 py-2">{{ user.email }}</td>
+              <td class="px-4 py-2">{{ user.bio or '-' }}</td>
+              <td class="px-4 py-2">{{ user.cpu }}</td>
+              <td class="px-4 py-2">{{ user.ram }}</td>
+              <td class="px-4 py-2">{{ user.disk }}</td>
+              <td class="px-4 py-2">
+                {% if user.is_verified %}
+                  <span class="text-green-600 font-semibold">Ya</span>
+                {% else %}
+                  <span class="text-red-500">Tidak</span>
+                {% endif %}
+              </td>
+              <td class="px-4 py-2">
+                <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}"
+                      onsubmit="return confirm('Yakin ingin menghapus user ini?');">
+                  <button type="submit" class="text-red-500 hover:underline">Hapus</button>
+                </form>
+              </td>
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="9" class="px-4 py-4 text-center text-gray-500">Belum ada pengguna.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PAGINATION -->
+<div class="mt-6 flex justify-center items-center space-x-2">
+  {% if users.has_prev %}
+    <a href="{{ url_for('admin_users', page=users.prev_num) }}"
+       class="px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
+      &laquo;
+    </a>
+  {% endif %}
+
+  {% set total_pages = users.pages %}
+  {% set current = users.page %}
+  {% set page_range = range(1, total_pages + 1) %}
+  
+  {% for page_num in page_range %}
+    {% if page_num == 1 or page_num == total_pages or (page_num >= current - 2 and page_num <= current + 2) %}
+      {% if page_num == current %}
+        <span class="px-3 py-2 bg-blue-600 text-white rounded-md">{{ page_num }}</span>
+      {% else %}
+        <a href="{{ url_for('admin_users', page=page_num) }}"
+           class="px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
+          {{ page_num }}
+        </a>
+      {% endif %}
+    {% elif page_num == 2 and current > 4 %}
+      <span class="px-2">...</span>
+    {% elif page_num == total_pages - 1 and current < total_pages - 3 %}
+      <span class="px-2">...</span>
+    {% endif %}
+  {% endfor %}
+
+  {% if users.has_next %}
+    <a href="{{ url_for('admin_users', page=users.next_num) }}"
+       class="px-3 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100">
+      &raquo;
+    </a>
+  {% endif %}
+</div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+      <footer class="bg-white border-t border-gray-200 py-4 text-xs">
+        <div class="max-w-screen-md mx-auto text-center text-gray-500 space-y-0.5 leading-tight">
+          <p class="font-semibold text-gray-700">Kocheng's |> Sahabat Ai Nusantara</p>
+          <p>JL. Anggrek Klagenserut, Jiwan Kabupaten Madiun (6311).</p>
+          <p><i class="fa-solid fa-envelope"></i> kentukimeme@gmail.com</p>
+          <p><i class="fa-brands fa-tiktok"></i> @gemoyberanak2</p>
+          <p>
+            <a href="https://wa.me/6281775155057" target="_blank" class="text-green-600 hover:underline">
+              <i class="fa-brands fa-whatsapp"></i> +62 817-7515-5057
+            </a>
+          </p>
+        </div>
+      </footer>
+
+<!-- Notifikasi -->
+<div id="popupDelete" class="fixed top-5 right-5 bg-white border-l-4 border-green-500 shadow-lg rounded-md px-4 py-3 text-green-700 flex items-center space-x-3 opacity-0 translate-y-[-10px] transition-all duration-500">
+  <i class="fa-solid fa-circle-check text-green-500 text-xl"></i>
+  <span>Berhasil Menghapus User!</span>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("delete") === "success") {
+      const popup = document.getElementById("popupDelete");
+      popup.classList.remove("opacity-0", "translate-y-[-10px]");
+      popup.classList.add("opacity-100", "translate-y-0");
+
+      setTimeout(() => {
+        popup.classList.remove("opacity-100", "translate-y-0");
+        popup.classList.add("opacity-0", "translate-y-[-10px]");
+        window.location.href = '/admin/list/user';
+      }, 3000);
+    }
+  });
+</script>
+</body>
+</html>

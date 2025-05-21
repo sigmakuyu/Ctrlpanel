@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<link rel="icon" type="image/png" href="/static/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+<link rel="shortcut icon" href="/static/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+<link rel="manifest" href="/static/site.webmanifest" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Sahabat Ai Nusantara |> Registrasi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.8s ease-out;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-white to-blue-100 min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+<header class="bg-white border-b border-gray-200 py-3 shadow-sm">
+  <div class="max-w-screen-lg mx-auto flex justify-between items-center px-4">
+    <a href="/dashboard" class="transition-transform duration-200 hover:scale-105">
+  <img src="/static/logo2.png" alt="Logo" class="h-10 max-w-[200px]" />
+</a>
+    <span class="text-sm text-gray-500">ID</span>
+  </div>
+</header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow flex items-center justify-center px-4">
+    <div class="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-md fade-in">
+      <h2 class="text-2xl font-bold text-center mb-6">Daftar Akun</h2>
+
+      {% if message %}
+        <div class="mb-4 p-3 bg-red-100 text-red-700 rounded text-center">{{ message }}</div>
+      {% endif %}
+
+      <form action="/daftar/email" method="POST" class="space-y-4 text-left">
+        <div>
+          <label for="nama" class="block text-sm font-medium text-gray-700">Username</label>
+          <input type="text" id="nama" name="nama" required placeholder="Masukkan username Anda"
+            class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+        </div>
+
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" name="email" required placeholder="Masukkan email Anda"
+            class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" name="password" required placeholder="Masukkan password Anda"
+            class="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300" />
+        </div>
+
+        <button type="submit"
+          class="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-full font-semibold transition">
+          Daftar
+        </button>
+      </form>
+
+      <p class="mt-6 text-sm text-center text-gray-600">
+        Sudah punya akun?
+        <a href="/login/email" class="text-blue-600 hover:underline font-medium">Masuk di sini</a>
+      </p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-gray-200 py-2 text-xs">
+    <div class="max-w-screen-md mx-auto text-center text-gray-500 space-y-0.5 leading-tight">
+      <p class="font-semibold text-gray-700">Kocheng's |> Sahabat Ai Nusantara</p>
+      <p>JL. Anggrek Klagenserut, Jiwan Kabupaten Madiun (6311).</p>
+      <p><i class="fa-solid fa-envelope"></i> kentukimeme@gmail.com</p>
+      <p><i class="fa-brands fa-tiktok"></i> @gemoyberanak2</p>
+      <p>
+        <a href="https://wa.me/6281775155057" target="_blank" class="text-green-600 hover:underline">
+          <i class="fa-brands fa-whatsapp"></i> +62 817-7515-5057
+        </a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

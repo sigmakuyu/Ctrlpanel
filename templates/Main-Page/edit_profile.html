@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<link rel="icon" type="image/png" href="/static/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg" />
+<link rel="shortcut icon" href="/static/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+<link rel="manifest" href="/static/site.webmanifest" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sahabat Ai Nusantara |> Edit Profil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- FontAwesome -->
+  <style>
+    .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    .spin { animation: spin 1s linear infinite; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-white to-blue-100 min-h-screen flex flex-col justify-between">
+
+  <!-- HEADER -->
+<header class="bg-white border-b border-gray-200 py-3 shadow-sm">
+  <div class="max-w-screen-lg mx-auto flex justify-between items-center px-4">
+    <a href="/dashboard" class="transition-transform duration-200 hover:scale-105">
+  <img src="/static/logo2.png" alt="Logo" class="h-10 max-w-[200px]" />
+</a>
+    <span class="text-sm text-gray-500">ID</span>
+  </div>
+</header>
+
+  <!-- FORM SECTION -->
+  <main id="mainContent" class="flex-grow flex items-center justify-center px-4 py-10 opacity-0 translate-y-4 transition-all duration-700">
+    <form method="POST" enctype="multipart/form-data" class="bg-white shadow-xl rounded-2xl p-6 w-full max-w-sm sm:max-w-md md:max-w-md lg:max-w-lg xl:max-w-md space-y-6">
+      <h1 class="text-xl sm:text-2xl font-bold text-center mb-4">Edit Profil</h1>
+      
+      {% if message %}
+        <div class="mb-4 p-3 bg-red-100 text-red-700 rounded text-center">{{ message }}</div>
+      {% endif %}
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700" for="nama">Nama Lengkap</label>
+        <input type="text" id="nama" name="nama" value="{{ user.nama }}" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700" for="bio">Bio kamu</label>
+        <input type="text" id="bio" name="bio" value="{{ user.bio }}" required class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+      </div>
+      
+      <div>
+        <label class="block mb-1 font-medium text-gray-700" for="password_hash">Password</label>
+        <input 
+          type="password" 
+          id="password_hash" 
+          name="password_hash" 
+          placeholder="Masukan password baru"
+          {% if user.login_google %}readonly{% endif %}
+          class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 {% if user.login_google %}bg-gray-100 cursor-not-allowed{% endif %}">
+        {% if user.login_google %}
+          <p class="text-sm text-red-500 mt-1">Akun Google tidak bisa mengganti password.</p>
+        {% endif %}
+      </div>
+      
+      <div>
+        <label class="block mb-1 font-medium text-gray-700" for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          value="{{ user.email }}" 
+          {% if user.login_google %}readonly{% endif %}
+          required 
+          class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400 {% if user.login_google %}bg-gray-100 cursor-not-allowed{% endif %}">
+        {% if user.login_google %}
+          <p class="text-sm text-red-500 mt-1">Akun Google tidak bisa mengganti email.</p>
+        {% endif %}
+      </div>
+
+      <div>
+        <label class="block mb-1 font-medium text-gray-700">Foto Profil (Opsional)</label>
+        <div id="dropzone" class="relative flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer hover:bg-gray-50 transition text-center">
+          <i class="ph ph-upload-simple text-4xl text-gray-400 mb-2"></i>
+          <img id="photo-preview" src="{{ user.foto_url if user.foto_url else '' }}" alt="Preview Foto" class="w-24 h-24 object-cover rounded-full shadow-md mb-4 hidden">
+          <div id="spinner" class="hidden w-8 h-8 border-4 border-blue-400 border-t-transparent rounded-full spin"></div>
+          <p class="text-gray-500 text-sm" id="dropzone-text">Klik atau tarik gambar ke sini untuk upload</p>
+          <p id="error-message" class="text-red-500 text-sm mt-2 hidden"></p>
+        </div>
+        <input type="file" id="photo" name="photo" accept="image/*" class="hidden">
+        <button id="reset-button" type="button" class="hidden mt-2 bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm hover:bg-red-200">
+          Reset Foto
+        </button>
+      </div>
+
+      <div class="flex gap-4 pt-4">
+        <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium">
+          Simpan
+        </button>
+        <a href="{{ url_for('profil') }}" class="flex-1 border border-gray-300 hover:bg-gray-100 py-3 rounded-lg font-medium text-center">
+          Batal
+        </a>
+      </div>
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-gray-200 py-4 text-xs">
+    <div class="max-w-screen-md mx-auto text-center text-gray-500 space-y-1 leading-tight px-4">
+      <p class="font-semibold text-gray-700">Kocheng's |> Sahabat Ai Nusantara</p>
+      <p>JL. Anggrek Klagenserut, Jiwan Kabupaten Madiun (6311).</p>
+      <p><i class="fa-solid fa-envelope"></i> kentukimeme@gmail.com</p>
+      <p><i class="fa-brands fa-tiktok"></i> @gemoyberanak2</p>
+      <p>
+        <a href="https://wa.me/6281775155057" target="_blank" class="text-green-600 hover:underline">
+          <i class="fa-brands fa-whatsapp"></i> +62 817-7515-5057
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('photo');
+    const preview = document.getElementById('photo-preview');
+    const spinner = document.getElementById('spinner');
+    const errorMessage = document.getElementById('error-message');
+    const dropzoneText = document.getElementById('dropzone-text');
+    const resetButton = document.getElementById('reset-button');
+
+    function validateFile(file) {
+      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      const maxSize = 5 * 1024 * 1024;
+      if (!validTypes.includes(file.type)) return "File harus berupa gambar (JPG, PNG, atau GIF).";
+      if (file.size > maxSize) return "Ukuran file maksimal 5 MB.";
+      return null;
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.remove('hidden');
+      preview.classList.add('hidden');
+      spinner.classList.add('hidden');
+      resetButton.classList.add('hidden');
+    }
+
+    function showPreview(file) {
+      const reader = new FileReader();
+      spinner.classList.remove('hidden');
+      reader.onload = function(e) {
+        setTimeout(() => {
+          preview.src = e.target.result;
+          preview.classList.remove('hidden');
+          preview.classList.add('fade-in');
+          spinner.classList.add('hidden');
+          errorMessage.classList.add('hidden');
+          resetButton.classList.remove('hidden');
+        }, 800);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetPhoto() {
+      preview.src = '';
+      preview.classList.add('hidden');
+      fileInput.value = '';
+      resetButton.classList.add('hidden');
+      errorMessage.classList.add('hidden');
+    }
+
+    dropzone.addEventListener('click', () => fileInput.click());
+    resetButton.addEventListener('click', resetPhoto);
+
+    fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const error = validateFile(file);
+        if (error) { showError(error); return; }
+        showPreview(file);
+      }
+    });
+
+    dropzone.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      dropzone.classList.add('bg-gray-100');
+    });
+
+    dropzone.addEventListener('dragleave', function(e) {
+      e.preventDefault();
+      dropzone.classList.remove('bg-gray-100');
+    });
+
+    dropzone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      dropzone.classList.remove('bg-gray-100');
+      const file = e.dataTransfer.files[0];
+      if (file) {
+        const error = validateFile(file);
+        if (error) { showError(error); return; }
+        fileInput.files = e.dataTransfer.files;
+        showPreview(file);
+      }
+    });
+  </script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const main = document.getElementById("mainContent");
+    setTimeout(() => {
+      main.classList.remove("opacity-0", "translate-y-4");
+      main.classList.add("opacity-100", "translate-y-0");
+    }, 100);
+  });
+</script>
+</body>
+</html>
