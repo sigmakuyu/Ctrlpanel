@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: flask-app
+    runtime: python
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    plan: free
+    region: singapore
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: G_CLIENT_ID
+        sync: false
+      - key: G_CLIENT_SECRET
+        sync: false
+      - key: EMAIL_API_TOKEN
+        sync: false
+      - key: PANEL_CPU
+        sync: false
+      - key: PANEL_RAM
+        sync: false
+      - key: PANEL_DISK
+        sync: false
+      - key: PTERODACTYL_URL
+        sync: false
