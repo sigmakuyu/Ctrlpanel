@@ -3,8 +3,8 @@ import requests
 import logging
 
 # Konfigurasi Pterodactyl Panel API
-PTERODACTYL_URL = "https://panel.kocheng.biz.id"
-PTERODACTYL_API_KEY = "ptla_hApYLXfqCJS0bhPDUGk93LeayUFZspT0JGmAf5jgx5A"
+PTERODACTYL_URL = "https://console.kocheng.biz.id"
+PTERODACTYL_API_KEY = "ptla_Y9Lvz0SJkl8Erv8w7aJN6bM0DtewiuosPGh8LzFVNV9"
 
 # Header API
 headers = {
